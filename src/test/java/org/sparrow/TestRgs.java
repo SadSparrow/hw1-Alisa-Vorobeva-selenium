@@ -81,7 +81,7 @@ public class TestRgs {
         waitUtilElementToBeClickable(checkoutBtn);
         checkoutBtn.click();
 
-        // заполнить форму
+        //заполнить форму
         String parentFormXpath = "//*[@id='applicationForm']";
         WebElement parent = driver.findElement(By.xpath(parentFormXpath));
 
@@ -94,6 +94,7 @@ public class TestRgs {
 
         WebElement phone = parent.findElement(By.xpath(".//input[contains(@data-bind, 'Phone')]"));
         waitUtilElementToBeVisible(phone);
+        waitUtilElementToBeClickable(phone);
         phone.click();
         fillInputField(phone, "--------------------------111111-11-11");
 
@@ -122,6 +123,9 @@ public class TestRgs {
         checkValue(phone, "+7 (111) 111-11-11");
         WebElement region = driver.findElement(By.xpath(".//select"));
         Assert.assertEquals("Поле было заполнено некорректно", "77", region.getAttribute("value"));
+
+        //Нажать "отправить"
+        driver.findElement(By.id("button-m")).click();
 
         //Проверить, что у поля "Эл. почта" присутствует сообщение об ошибке
         checkErrorMessageAtField(driver.findElement(By.xpath("//*[@id='applicationForm']//input[contains(@data-bind, 'Email')]")),
